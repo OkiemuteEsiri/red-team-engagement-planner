@@ -1,0 +1,40 @@
+{
+  "engagement_id": "RT-2026-001",
+  "name": "Synthetic Finance Platform Detection Validation",
+  "business_owner": "Finance Product Owner",
+  "security_owner": "Security Engineering",
+  "start_date": "2026-10-05",
+  "end_date": "2026-10-09",
+  "status": "approved",
+  "risk_level": "high",
+  "objectives": [
+    "Validate identity and endpoint telemetry coverage for approved adversary behaviors",
+    "Measure whether detections generate actionable analyst evidence",
+    "Verify remediation and retest workflow without impacting production services"
+  ],
+  "scope": [
+    {"asset": "fin-app-lab-01", "environment": "isolated-lab", "owner": "Platform Engineering", "approved": true, "production": false, "critical_service": false},
+    {"asset": "id-lab-01", "environment": "isolated-lab", "owner": "Identity Engineering", "approved": true, "production": false, "critical_service": false}
+  ],
+  "techniques": [
+    {"technique_id": "T1078", "name": "Valid Accounts", "tactic": "Defense Evasion / Persistence / Privilege Escalation / Initial Access", "objective": "Validate detections for abnormal use of synthetic test identities", "detection_goal": "Correlate successful authentication with unusual device, location, and privilege context", "allowed": true},
+    {"technique_id": "T1059.001", "name": "PowerShell", "tactic": "Execution", "objective": "Validate benign scripted execution telemetry in the isolated lab", "detection_goal": "Confirm process, command-line, parent-child, and script-block telemetry are available to defenders", "allowed": true},
+    {"technique_id": "T1021.001", "name": "Remote Desktop Protocol", "tactic": "Lateral Movement", "objective": "Validate authorized administrative remote-session monitoring", "detection_goal": "Correlate logon type, source host, target host, account, and session telemetry", "allowed": true},
+    {"technique_id": "T1562.001", "name": "Impair Defenses", "tactic": "Defense Evasion", "objective": "Document a prohibited high-risk behavior for tabletop discussion only", "detection_goal": "Review whether control-tamper alerts and change-management evidence would be available", "allowed": false}
+  ],
+  "safety_controls": [
+    {"name": "Named authorization", "description": "Written approval covering scope, dates, owners and objectives", "mandatory": true, "implemented": true},
+    {"name": "Deconfliction channel", "description": "Dedicated security operations contact and escalation route", "mandatory": true, "implemented": true},
+    {"name": "Stop authority", "description": "Security operations and business owner may immediately halt activity", "mandatory": true, "implemented": true},
+    {"name": "Synthetic identities and data", "description": "Only synthetic accounts and non-sensitive test data are used", "mandatory": true, "implemented": true},
+    {"name": "Evidence handling", "description": "Evidence is minimized, access controlled and retained only for the exercise", "mandatory": true, "implemented": true}
+  ],
+  "exclusions": [
+    "Production systems and customer data",
+    "Credential harvesting or password cracking",
+    "Persistence mechanisms",
+    "Security-control disabling",
+    "Command-and-control infrastructure",
+    "Destructive or denial-of-service activity"
+  ]
+}
