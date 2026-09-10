@@ -93,7 +93,7 @@ class PlannerTests(unittest.TestCase):
         engagement = self.healthy_engagement()
         assessment = assess_engagement(engagement)
         report = render_markdown(engagement, assessment)
-        self.assertIn("Execution gate: **PASS**", report.replace("**Execution gate:**", "Execution gate:"))
+        self.assertIn("**Execution gate:** PASS", report)
         self.assertIn("T1078", report)
         self.assertIn("ATT&CK Validation Plan", report)
 
